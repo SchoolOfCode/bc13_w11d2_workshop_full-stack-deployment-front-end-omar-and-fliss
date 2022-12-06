@@ -54,7 +54,8 @@ function App() {
     setList(clearedList);
   }
 
-  function tickItem(idOfTickedItem) {
+  async function tickItem(idOfTickedItem, completedStatus) {
+    //This function updates the database to specify if an item is completed or not.
     setList((previous) => {
       return previous.map((item) => {
         return item.id !== idOfTickedItem
@@ -62,6 +63,16 @@ function App() {
           : { ...item, completed: !item.completed };
       });
     });
+
+    const response = await fetch(`${url}/${idOfTickedItem}`,{
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ completed: !completedStatus }),
+    } ) 
+    if (!response.ok) {
+      // Shouldn't really use alert, as it blocks, but will do for now.
+      return alert("Failed to update item, please try again later.");
+    }
   }
 
   return (
