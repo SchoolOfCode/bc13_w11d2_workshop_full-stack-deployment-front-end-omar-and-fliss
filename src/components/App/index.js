@@ -72,6 +72,8 @@ function App() {
     if (!response.ok) {
       // Shouldn't really use alert, as it blocks, but will do for now.
       return alert("Failed to update item, please try again later.");
+    } else {
+      console.log("Item updated");
     }
   }
 
