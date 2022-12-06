@@ -64,7 +64,7 @@ function App() {
       });
     });
 
-    const response = await fetch(`${url}/${idOfTickedItem}`,{
+    const response = await fetch(`${url}/items/${idOfTickedItem}`,{
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ completed: !completedStatus }),
